@@ -1,0 +1,125 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&family=Roboto:wght@300&family=Source+Sans+Pro:wght@600&display=swap');
+
+*{
+  margin: 0;
+  padding: 0;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+.img{
+  border-radius: 50%;
+}
+.img:hover{
+  border: 0.3rem solid #04de6f;
+}
+.home{
+  display: flex;
+  height: 91.5vh;
+}
+.sidebar{
+  flex: 0.25;
+  border-right: 2px solid rgb(203, 203, 203);
+  flex-direction: column;
+  position: relative;
+}
+.search{
+  width: 90% !important;
+}
+.chatlist{
+  border-bottom: 1px solid #f3f5f6 !important;
+}
+.chatlist:hover{
+  background-color: #30d780;
+}
+.profile, .chatinput{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.image{
+  height: 3rem !important;
+  width: 3rem !important;
+}
+.chat{
+  flex-direction: column;
+  position: relative;
+  flex:0.75;
+}
+.chatinput{
+  padding: 0 .5rem;
+  border-radius: 5px;
+}
+.emoji{
+  margin-left: .2rem;
+  color: #bab9b8;
+}
+.msginput{
+  width: 90% !important;
+  margin: .7rem .8rem;
+}
+.sendicon{
+  background-color: #04de6f;
+  border-radius: 50%;
+  padding: .4rem;
+  padding-left: .6rem;
+}
+.sendicon path{
+  color: #fff !important;
+}
+.chat-messages {
+  padding: 1rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  overflow: auto;
+  height: 81.5vh;
+  margin-bottom: 3.5rem;
+}
+.chat-messages::-webkit-scrollbar {
+    width: 0.2rem;
+}
+.chat-messages::-webkit-scrollbar-thumb {
+      background-color: #ffffff39;
+      width: 0.1rem;
+      border-radius: 1rem;
+    }
+.message {
+  display: flex;
+  align-items: center;
+}
+.message  .content {
+    max-width: 40%;
+    overflow-wrap: break-word;
+    padding: 1rem;
+    font-size: 1.1rem;
+    border-radius: 1rem;
+    color: #d1d1d1;
+}
+.sended {
+  justify-content: flex-end;
+}
+.recieved {
+  justify-content: flex-start;
+}
+
+@media  (min-width:320px) and (max-width:767px) {
+  .sidebar{
+    flex:1
+  }
+  .chat{
+    flex: 1;
+    width: 100vw;
+  }
+  .message  .content {
+    max-width: 40%;
+    padding: .5rem;
+    font-size: 1rem;
+}
+}
+
+@media (min-height:670px) {
+  .home{
+    min-height: 93.5vh;
+  }
+}
