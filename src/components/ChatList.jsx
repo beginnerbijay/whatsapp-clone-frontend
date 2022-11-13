@@ -43,6 +43,7 @@ function ChatList() {
     <BiFilter size='1.5rem'/>
     </Center>
 </Flex>
+<Flex className='list'>
       {
         search().map((val,ind)=>{
           return(
@@ -64,6 +65,7 @@ function ChatList() {
           )
         })
       }
+      </Flex>
     </>
   )
 }

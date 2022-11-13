@@ -25,6 +25,19 @@
 .search{
   width: 90% !important;
 }
+.list{
+  flex-direction: column;
+  overflow: auto;
+  margin-bottom: 4rem;
+}
+.list::-webkit-scrollbar{
+  width: .2rem;
+}
+.list::-webkit-scrollbar-thumb {
+  background-color: #ffffff39;
+  width: 0.1rem;
+  border-radius: 1rem;
+}
 .chatlist{
   border-bottom: 1px solid #f3f5f6 !important;
 }

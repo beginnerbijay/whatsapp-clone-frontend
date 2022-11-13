@@ -1,5 +1,5 @@
-import React,{useContext, useState} from 'react'
-import {FormControl,FormLabel,Input,Button} from '@chakra-ui/react'
+import React,{useContext, useRef, useState} from 'react'
+import {FormControl,FormLabel,Input,Button, Progress} from '@chakra-ui/react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import UserContext from '../context'
@@ -10,6 +10,7 @@ function LogIn() {
         name:'',
         password:""
     })
+    const [loading, setloading] = useState(false)
     const {setuser,user} = useContext(UserContext)
     const nav = useNavigate()
     const inputhandler=(e)=>{
@@ -19,12 +20,17 @@ function LogIn() {
     const handler=async(e)=>{
       try{
         e.preventDefault();
-        const {data} = await axios.post(`${host}/login`,input)
-        if(data){
-          setuser(data)
-          nav(`/${data._id}`)
+        setloading(true)
+        if((input.name && input.password)==""){
+          alert("fill required field")
         }else{
-          console.log("backend error")
+          const {data} = await axios.post(`${host}/login`,input)
+          if(data){
+            setuser(data)
+            nav(`/${data._id}`)
+          }else{
+            console.log("backend error")
+          }
         }
         }
         catch(e){
@@ -32,7 +38,9 @@ function LogIn() {
         }
     }
   return (
-    <><FormControl isRequired>
+    <>
+    {loading?<Progress size='xs' isIndeterminate />:""}
+    <FormControl isRequired>
     <FormLabel>Name</FormLabel>
     <Input placeholder='Name' type='text' onChange={inputhandler} value={input.name} name='name'/>
     <FormLabel>Password</FormLabel>

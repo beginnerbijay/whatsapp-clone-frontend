@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   FormControl,
@@ -7,6 +7,7 @@ import {
   Button,
   Flex,
   useConst,
+  Progress,
 } from "@chakra-ui/react";
 import axios from "axios";
 import { Buffer } from "buffer";
@@ -19,6 +20,8 @@ function SignIn() {
     phone: "",
     password: "",
   });
+  const [loading, setloading] = useState(false)
+  const btnref = useRef()
   const api = `https://api.multiavatar.com/j3m97UJ5v2pbXP`;
   const [avatars, setAvatars] = useState([]);
   const [selectedAvatar, setSelectedAvatar] = useState(undefined);
@@ -30,6 +33,13 @@ function SignIn() {
   const handler = async (e) => {
     try {
       e.preventDefault();
+      if((input.name && input.email && input.phone && input.password) == ""){
+        alert("fill required field")
+      }else{
+      if(btnref.current){
+        btnref.current.setAttribute("disabled", "disabled");
+      }
+      setloading(true)
       const { data } = await axios.post(`${host}/add`, {
         input,
         avatar: avatars[selectedAvatar],
@@ -39,7 +49,7 @@ function SignIn() {
         nav(`/${data._id}`);
       } else {
         console.log("backend error");
-      }
+      }}
     } catch (e) {
       console.log("error");
     }
@@ -59,7 +69,7 @@ function SignIn() {
     fetchData();
   }, []);
   return (
-    <>
+    <>{loading?<Progress size='xs' isIndeterminate />:""}
       <FormControl isRequired>
         <FormLabel>Name</FormLabel>
         <Input
@@ -113,6 +123,7 @@ function SignIn() {
         </Flex>
       </FormControl>
       <Button
+      ref={btnref}
         size="md"
         height="36px"
         width="100%"
